@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<main class="layout">
+    <div class="container" style="display: block;">
+      <div style="margin-top: 40px;">
+          <h1 style="margin-bottom: 20px;">Report List</h1>
+          <table id="customers">
+            <tr>
+                <th>Civialian Name</th>
+                <th>Barangay</th>
+                <th>Location</th>
+                <th>Complaints</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+            {% for report in reports %}
+                <tr>
+                    <td> {{report.user.name}} </td>
+                    <td> {{report.barangay}} </td>
+                    <td> {{report.location}} </td>
+                    <td> {{report.description}} </td>
+                    <td> {{report.status.name}} </td>
+                    <td> {{report.created}} </td>
+                    <td>
+                        <a href="{% url 'update-report' report.id %}">Edit</a> 
+                        <a href="{% url 'delete-report' report.id %}" style="margin-left: 20px; color: red;">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+          </table>
+      </div>
+    </div>
+  </main>
+{% endblock %}

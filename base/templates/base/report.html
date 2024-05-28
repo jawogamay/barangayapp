@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main class="layout layout--3">
+  <div class="container" style="display: block;">
+    <a class="btn btn--main" href="{% url 'create-report' %}">
+        Create Report
+    </a>
+    <div style="margin-top: 40px;">
+        <h1 style="margin-bottom: 20px;">My Report</h1>
+        {% for report in reports %}
+        <div class="roomListRoom">
+            <div class="activities__boxHeader roomListRoom__header">
+                <a href="#" class="roomListRoom__author">
+                    <div class="avatar avatar--small">
+                        <img src="/static/images/avatar.svg" />
+                    </div>
+                    <p>
+                        <span>{{report.created|timesince}} ago</span>
+                    </p>
+                </a>
+                {% if report.status.name %}
+                <button class="btn btn--pill">
+                    {{report.status.name}}
+                </button>
+                {% else %}
+                <button class="btn btn--pill">
+                    Ongoing
+                </button>
+                {% endif %}
+            </div>
+            <div class="activities__boxContent">
+                <p>Location:&nbsp; <a href="#">{{report.location}}</a></p>
+                <p>Barangay:&nbsp; <a href="#">{{report.barangay}}</a></p>
+                {% if report.image %}
+                    <img src="{{report.image.url}}" style="width: 100%;"/>
+                {% endif %}
+                <div class="activities__boxRoomContent" style="word-wrap: break-word;">{{report.description}}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main class="layout layout--3">
+  <div class="container" style="display:block; text-align: center; margin: 0 auto; font-size: 50px;">
+    <h1>Welcome to Barangay Report Application</h1>
+    {% if request.user.is_staff %}
+        <a href="{% url 'staff-reports' %}" class="btn btn--main">Report</a>
+    {% else %}
+    <a href="{% url 'user-reports' %}" class="btn btn--main">Report</a>
+    {% endif %}
+</div>
+</main>
+
+{% endblock %}
